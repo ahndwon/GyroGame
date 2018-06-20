@@ -16,6 +16,6 @@ abstract class View : Cloneable {
     abstract fun onUpdate()
 
     fun update() {
-
+        onUpdate()
     }
 }
