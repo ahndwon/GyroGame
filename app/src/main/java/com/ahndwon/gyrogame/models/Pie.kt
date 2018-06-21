@@ -1,21 +1,40 @@
 package com.ahndwon.gyrogame.models
 
 import android.content.Context
-import models.Vector2D
-import processing.core.PApplet
+import android.graphics.*
+import android.view.WindowManager
 import kotlin.math.PI
 
-class Pie(val color : RGBColor, var startAngle: Float,
-          val pos: Vector2D, val size : Vector2D){
+class Pie(context: Context, val color: Int, var startAngle: Float){
     var endAngle : Float
+    var mPath : Path
+    var mPaint : Paint
+    val displaySize: Point
+    var radius = 300f
+
     init {
-        println("init, color: ${color.r}, ${color.g}, ${color.b}")
         endAngle = (startAngle + PI * 2 / 3).toFloat()
+        mPath = Path()
+        mPaint = Paint()
+        mPaint.color = color
+        mPaint.isAntiAlias = true
+        mPaint.style = Paint.Style.FILL
+        mPaint.strokeJoin = Paint.Join.ROUND
+        mPaint.strokeWidth = 4f
+
+        val display = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        displaySize = Point()
+        display.getSize(displaySize)
     }
 
-    fun render(pApplet: PApplet) {
-        pApplet.fill(color.r, color.g, color.b, color.alpha)
-        endAngle = (startAngle + PI * 2 / 3).toFloat()
-        pApplet.arc(pos.x, pos.y, size.x, size.y, startAngle, endAngle)
+    fun render(canvas: Canvas) {
+        canvas.drawArc((displaySize.x / 2 - radius),
+                (displaySize.y / 2 - radius),
+                (displaySize.x / 2 + radius),
+                (displaySize.y / 2 + radius),
+                startAngle,
+                120f,
+                true,
+                mPaint)
     }
 }
