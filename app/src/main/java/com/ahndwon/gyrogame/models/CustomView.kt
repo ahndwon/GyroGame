@@ -63,6 +63,7 @@ class CustomView(context: Context) : View(context) {
             m.render(canvas)
         }
         println("list size : ${missileList.size}")
+        invalidate()
     }
 
     private fun startTouch(x: Float, y: Float) {
@@ -71,7 +72,7 @@ class CustomView(context: Context) : View(context) {
     }
 
     private fun moveTouch(x: Float, y: Float) {
-        val dx = x - mX
+        val dx = mX - x
         val dy = y - mY
 
         // arctan2로 바꾸기
@@ -112,4 +113,6 @@ class CustomView(context: Context) : View(context) {
         }
         return true
     }
+
+
 }
