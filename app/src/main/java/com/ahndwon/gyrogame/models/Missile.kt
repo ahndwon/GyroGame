@@ -58,9 +58,6 @@ class Missile(context: Context, val radius : Float, val color: Int) : View(conte
         move()
         canvas.drawCircle(pos.x.toFloat(), pos.y.toFloat(), radius, fillPaint)
         canvas.drawCircle(pos.x.toFloat(), pos.y.toFloat(), radius, strokePaint)
-//        canvas.drawCircle(random.nextInt(displaySize.x).toFloat(),
-//                random.nextInt(displaySize.y).toFloat(),
-//                radius, fillPaint)
     }
 
     fun move() {
